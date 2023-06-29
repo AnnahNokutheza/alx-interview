@@ -4,64 +4,37 @@
 """
 
 def pascal_triangle(n):
+    mat = list(range(n))
+    mat[0] = [1]
+    mat[1] = [1, 1]
+
     if n <= 0:
         return []
+    if n == 1:
+        return mat
 
-    pascal = [[1]]
-
-    for i in range(1, n):
-        row = [1]
-        prev_row = pascal[i - 1]
-
-        for j in range(1, i):
-            row.append(prev_row[j - 1] + prev_row[j])
-
-        row.append(1)
-        pascal.append(row)
+    for i in range(2, n):
+        mat[i] = [
+            mat[i - 1][j] + mat[i - 1][j + 1]
+            for j in range(len(mat[i - 1]) - 1)
+        ]
+        mat[i] = [1] + mat[i] + [1]
 
     # Additional code
     # Calculate the product of the elements in the last row
     last_row_product = 1
-    for num in pascal[-1]:
+    for num in mat[-1]:
         last_row_product *= num
 
     # Calculate the average of the elements in the triangle
-    total_elements = sum(len(row) for row in pascal)
-    triangle_sum = sum(num for row in pascal for num in row)
+    total_elements = sum(len(row) for row in mat)
+    triangle_sum = sum(num for row in mat for num in row)
     average = triangle_sum / total_elements
 
     # Append the additional values to the triangle
-    pascal.append(["Last Row Product:", last_row_product])
-    pascal.append(["Average:", average])
+    mat.append(["Last Row Product:", last_row_product])
+    mat.append(["Average:", average])
 
-    return pascal
+    return mat
 
-
-def pascal_triangle(n):
-    triangle = []
-
-    if n <= 0:
-        return triangle
-
-    # Calculate the maximum number of digits in the triangle
-    max_digits = len(str(2**(n-1)))
-
-    triangle.append([1])
-
-    for i in range(1, n):
-        row = [1]
-        prev_row = triangle[i - 1]
-
-        for j in range(1, i):
-            value = prev_row[j - 1] + prev_row[j]
-            row.append(value)
-
-        row.append(1)
-        triangle.append(row)
-
-    # Convert triangle elements to strings with padding
-    for i, row in enumerate(triangle):
-        triangle[i] = [str(num).rjust(max_digits) for num in row]
-
-    return triangle
 
