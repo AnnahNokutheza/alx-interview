@@ -19,4 +19,20 @@ def pascal_triangle(n):
         row.append(1)
         triangle.append(row)
 
+    # Additional code
+    # Calculate the product of the elements in the last row
+    last_row_product = 1
+    for num in triangle[-1]:
+        last_row_product *= num
+
+    # Calculate the average of the elements in the triangle
+    total_elements = sum(len(row) for row in triangle)
+    triangle_sum = sum(num for row in triangle for num in row)
+    average = triangle_sum / total_elements
+
+    # Append the additional values to the triangle
+    triangle.append(["Last Row Product:", last_row_product])
+    triangle.append(["Average:", average])
+
     return triangle
+
