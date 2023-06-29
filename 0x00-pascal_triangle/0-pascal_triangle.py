@@ -37,36 +37,31 @@ def pascal_triangle(n):
     return pascal
 
 
-def is_pascal_triangle_valid(pascal):
-    if not isinstance(pascal, list):
-        return False
+def pascal_triangle(n):
+    triangle = []
 
-    for i, row in enumerate(pascal):
-        if not isinstance(row, list):
-            return False
+    if n <= 0:
+        return triangle
 
-        if i > 0 and len(row) != len(pascal[i - 1]) + 1:
-            return False
+    # Calculate the maximum number of digits in the triangle
+    max_digits = len(str(2**(n-1)))
 
-        if i > 1:
-            prev_row = pascal[i - 1]
-            for j in range(1, len(row) - 1):
-                if row[j] != prev_row[j - 1] + prev_row[j]:
-                    return False
+    triangle.append([1])
 
-    return True
+    for i in range(1, n):
+        row = [1]
+        prev_row = triangle[i - 1]
 
+        for j in range(1, i):
+            value = prev_row[j - 1] + prev_row[j]
+            row.append(value)
 
-# Additional test cases
-test_pascal = pascal_triangle(5)
-print(test_pascal)
-print("Is Pascal's triangle valid?", is_pascal_triangle_valid(test_pascal))
+        row.append(1)
+        triangle.append(row)
 
-test_pascal = pascal_triangle(6)
-print(test_pascal)
-print("Is Pascal's triangle valid?", is_pascal_triangle_valid(test_pascal))
+    # Convert triangle elements to strings with padding
+    for i, row in enumerate(triangle):
+        triangle[i] = [str(num).rjust(max_digits) for num in row]
 
-test_pascal = pascal_triangle(7)
-print(test_pascal)
-print("Is Pascal's triangle valid?", is_pascal_triangle_valid(test_pascal))
+    return triangle
 
