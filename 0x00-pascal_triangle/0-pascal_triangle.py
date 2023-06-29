@@ -37,9 +37,36 @@ def pascal_triangle(n):
     return triangle
 
 
-# Additional test cases
-print(pascal_triangle(5))
-print(pascal_triangle(6))
-print(pascal_triangle(7))
+def is_pascal_triangle_valid(triangle):
+    if not isinstance(triangle, list):
+        return False
 
+    for i, row in enumerate(triangle):
+        if not isinstance(row, list):
+            return False
+
+        if i > 0 and len(row) != len(triangle[i - 1]) + 1:
+            return False
+
+        if i > 1:
+            prev_row = triangle[i - 1]
+            for j in range(1, len(row) - 1):
+                if row[j] != prev_row[j - 1] + prev_row[j]:
+                    return False
+
+    return True
+
+
+# Additional test cases
+test_triangle = pascal_triangle(5)
+print(test_triangle)
+print("Is Pascal's triangle valid?", is_pascal_triangle_valid(test_triangle))
+
+test_triangle = pascal_triangle(6)
+print(test_triangle)
+print("Is Pascal's triangle valid?", is_pascal_triangle_valid(test_triangle))
+
+test_triangle = pascal_triangle(7)
+print(test_triangle)
+print("Is Pascal's triangle valid?", is_pascal_triangle_valid(test_triangle))
 
