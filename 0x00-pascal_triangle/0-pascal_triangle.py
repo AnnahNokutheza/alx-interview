@@ -36,3 +36,10 @@ def pascal_triangle(n):
 
     return triangle
 
+
+# Additional test cases
+print(pascal_triangle(5))
+print(pascal_triangle(6))
+print(pascal_triangle(7))
+
+
