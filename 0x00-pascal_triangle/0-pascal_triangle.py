@@ -40,6 +40,7 @@ def pascal_triangle(n):
                     rowlist.append(previous[i - 1] + previous[i])
 
         previous = rowlist
+        new_row.append(1)
         triangle.append(rowlist)
 
     return triangle
