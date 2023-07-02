@@ -16,17 +16,23 @@ def pascal_triangle(n):
     Raises:
         None.
     """
-
+    
     if n <= 0:
         return []
 
-    triangle = [[1]]  # Initialize the triangle with the first row
-    while len(triangle) < n:  # Loop until the desired number of rows is reached
-        prev_row = triangle[-1]  # Get the previous row
-        new_row = [1]  # The new row always starts with 1
+    triangle = [[1]]
+    while len(triangle) < n:
+        prev_row = triangle[-1]
+        new_row = [1]
         for i in range(len(prev_row) - 1):
-            new_row.append(prev_row[i] + prev_row[i + 1])  # Compute the values for the new row
-        new_row.append(1)  # The new row always ends with 1
-        triangle.append(new_row)  # Add the new row to the triangle
+            new_row.append(prev_row[i] + prev_row[i + 1])
+        new_row.append(1)
+        triangle.append(new_row)
 
     return triangle
+
+# Adding two lines of code
+n = int(input("Enter the number of rows for Pascal's triangle: "))
+result = pascal_triangle(n)
+print(result)
+
