@@ -19,6 +19,6 @@ def canUnlockAll(boxes):
                 visited[key] = True  # Mark the box as visited
                 queue.append(key)  # Add the box to the queue for further exploration
 
-    # Check if all boxes have been visited
-    return '\n'.join(str(box) for box in visited)
+    # Return the list of visited boxes
+    return visited
 
