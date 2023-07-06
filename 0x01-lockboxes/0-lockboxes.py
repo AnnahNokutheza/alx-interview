@@ -3,21 +3,16 @@
 
 
 def canUnlockAll(boxes):
-    num_boxes = len(boxes)
-    visited = [False] * num_boxes  # Keep track of visited boxes
-    visited[0] = True  # Mark the first box as visited
-    queue = deque([0])  # Start BFS from the first box
+    """This function will take a list of lists and the content
+       of a list will unlock other lists
+    """
 
-    while queue:
-        current_box = queue.popleft()
-        keys = boxes[current_box]  # Get the keys in the current box
-
-        for key in keys:
-            if key >= 0 and key < num_boxes and not visited[key]:
-                visited[key] = True  # Mark the box as visited
-                queue.append(key)  # Add the box to the queue for further exploration
-
-    # Check if all boxes have been visited
-    return all(visited)
-
+    keys = [0]
+    for key in keys:
+        for boxKey in boxes[key]:
+            if boxKey not in keys and boxKey < len(boxes):
+                keys.append(boxKey)
+    if len(keys) == len(boxes):
+        return True
+    return False
 
