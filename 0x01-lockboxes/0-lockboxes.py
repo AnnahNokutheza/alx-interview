@@ -1,30 +1,28 @@
-from collections import deque
+#!/usr/bin/python3
+""" Module that checks locked boxes """
+
 
 def canUnlockAll(boxes):
-    num_boxes = len(boxes)
-    visited = [False] * num_boxes  # Keep track of visited boxes
-    visited[0] = True  # Mark the first box as visited
-    queue = deque([0])  # Start BFS from the first box
+    """ Method that determines if all boxes can be opened """
 
-    while queue:
-        current_box = queue.popleft()
-        keys = boxes[current_box]  # Get the keys in the current box
+    if boxes == 0:
+        return False
 
-        for key in keys:
-            if key >= 0 and key < num_boxes and not visited[key]:
-                visited[key] = True  # Mark the box as visited
-                queue.append(key)  # Add the box to the queue for further exploration
+    if not isinstance(boxes, list):
 
-    # Check if all boxes can be visited starting from box 0
-    return all(visited)
+    if len(boxes) == 0:
+        return False
 
+    check = [0]
+    list_ing = [i for i in range(len(boxes))]
+    for in_check in check:
+        for in_boxes in boxes[in_check]:
+            if in_boxes not in check and in_boxes in list_ing:
+                if in_boxes >= len(boxes):
+                    return False
+                check.append(in_boxes)
 
-# Testing the code
-boxes = [[1], [2], []]
-print(canUnlockAll(boxes))  # Output: True
-
-boxes = [[1, 2], [3], [], [4]]
-print(canUnlockAll(boxes))  # Output: True
-
-boxes = [[1], [2, 3], [4], [0], []]
-print(canUnlockAll(boxes))  # Output: False
+                if len(check) == len(boxes):
+        return True
+    else:
+        return False
