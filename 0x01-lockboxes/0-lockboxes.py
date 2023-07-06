@@ -5,12 +5,11 @@
 def canUnlockAll(boxes):
     """ Method that determines if all boxes can be opened """
 
-    if boxes == 0:
+ def canUnlockAll(boxes):
+    if len(boxes) == 0:
         return False
 
     if not isinstance(boxes, list):
-
-    if len(boxes) == 0:
         return False
 
     check = [0]
@@ -22,7 +21,8 @@ def canUnlockAll(boxes):
                     return False
                 check.append(in_boxes)
 
-                if len(check) == len(boxes):
+    if len(check) == len(boxes):
         return True
     else:
         return False
+
