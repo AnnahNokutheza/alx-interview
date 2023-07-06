@@ -15,5 +15,16 @@ def canUnlockAll(boxes):
                 visited[key] = True  # Mark the box as visited
                 queue.append(key)  # Add the box to the queue for further exploration
 
-    # Check if all boxes have been visited
+    # Check if all boxes can be visited starting from box 0
     return all(visited)
+
+
+# Testing the code
+boxes = [[1], [2], []]
+print(canUnlockAll(boxes))  # Output: True
+
+boxes = [[1, 2], [3], [], [4]]
+print(canUnlockAll(boxes))  # Output: True
+
+boxes = [[1], [2, 3], [4], [0], []]
+print(canUnlockAll(boxes))  # Output: False
