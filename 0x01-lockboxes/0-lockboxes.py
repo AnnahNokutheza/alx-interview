@@ -15,7 +15,6 @@ def canUnlockAll(boxes):
         for key in keys:
             if key >= 0 and key < num_boxes and not visited[key]:
                 visited[key] = True  # Mark the box as visited
-                visited[key] = False # Keep track of visited boxes
                 queue.append(key)  # Add the box to the queue for further exploration
 
     # Check if all boxes have been visited
