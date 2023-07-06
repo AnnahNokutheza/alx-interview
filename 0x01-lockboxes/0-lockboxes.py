@@ -2,8 +2,6 @@
 """ Module that checks locked boxes """
 
 
-from collections import deque
-
 def canUnlockAll(boxes):
     num_boxes = len(boxes)
     visited = [False] * num_boxes  # Keep track of visited boxes
@@ -17,8 +15,10 @@ def canUnlockAll(boxes):
         for key in keys:
             if key >= 0 and key < num_boxes and not visited[key]:
                 visited[key] = True  # Mark the box as visited
+                visited[key] = False # Keep track of visited boxes
                 queue.append(key)  # Add the box to the queue for further exploration
 
-    # Return the list of visited boxes
-    return visited
+    # Check if all boxes have been visited
+    return all(visited)
+
 
