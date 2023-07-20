@@ -1,48 +1,37 @@
 #!/usr/bin/python3
+'''a script that reads stdin line by line and computes metrics'''
+
+
 import sys
 
-# Function to print statistics based on current data
-def print_statistics(file_sizes, status_codes):
-    total_size = sum(file_sizes)
-    print(f"Total file size: {total_size}")
-
-    for code in sorted(status_codes.keys()):
-        print(f"{code}: {status_codes[code]}")
-
-# Initialize variables to store data
-file_sizes = []
-status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
-line_count = 0
+cache = {'200': 0, '301': 0, '400': 0, '401': 0,
+         '403': 0, '404': 0, '405': 0, '500': 0}
+total_size = 0
+counter = 0
 
 try:
-    # Read input from stdin line by line
     for line in sys.stdin:
-        line_count += 1
+        line_list = line.split(" ")
+        if len(line_list) > 4:
+            code = line_list[-2]
+            size = int(line_list[-1])
+            if code in cache.keys():
+                cache[code] += 1
+            total_size += size
+            counter += 1
 
-        # Parse the line to get relevant data
-        parts = line.strip().split()
-        if len(parts) != 7:
-            continue
+        if counter == 10:
+            counter = 0
+            print('File size: {}'.format(total_size))
+            for key, value in sorted(cache.items()):
+                if value != 0:
+                    print('{}: {}'.format(key, value))
 
-        ip_address, _, _, method, _, status_code, file_size = parts
+except Exception as err:
+    pass
 
-        if method != 'GET':
-            continue
-
-        try:
-            status_code = int(status_code)
-            file_size = int(file_size)
-        except ValueError:
-            continue
-
-        # Update statistics
-        file_sizes.append(file_size)
-        status_codes[status_code] += 1
-
-        # Print statistics after every 10 lines
-        if line_count % 10 == 0:
-            print_statistics(file_sizes, status_codes)
-
-except KeyboardInterrupt:
-    # Handle keyboard interruption (CTRL + C)
-    print_statistics(file_sizes, status_codes)
+finally:
+    print('File size: {}'.format(total_size))
+    for key, value in sorted(cache.items()):
+        if value != 0:
+            print('{}: {}'.format(key, value))
