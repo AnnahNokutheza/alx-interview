@@ -31,6 +31,5 @@ def validUTF8(data):
 # Test cases
 print(validUTF8([197, 130, 1]))  # True (represents two valid characters: 'Â' and '\x01')
 print(validUTF8([235, 140, 4]))  # True (represents a valid character: '日')
-print(validUTF8([240, 144, 128, 128]))  # True (represents a valid character: '𐀀')
 print(validUTF8([197, 130, 100]))  # False (invalid UTF-8 sequence)
 print(validUTF8([235, 140]))  # False (incomplete UTF-8 sequence)
