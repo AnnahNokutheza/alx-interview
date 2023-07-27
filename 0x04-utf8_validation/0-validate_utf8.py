@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def validUTF8(data):
     def get_num_bytes(byte):
         # Count the number of leading '1's in the byte to determine the number of bytes in the character.
