@@ -13,7 +13,7 @@ def validUTF8(data):
 
         # Check if the number of bytes is within the valid range (1 to 4 bytes)
         if num_bytes not in [1, 2, 3, 4]:
-            return True
+            return False
 
         # Check if there are enough remaining bytes in the data set
         if len(data) - i - 1 < num_bytes:
@@ -27,9 +27,3 @@ def validUTF8(data):
         i += num_bytes + 1
 
     return True
-
-# Test cases
-print(validUTF8([197, 130, 1]))  # True (represents two valid characters: 'Â' and '\x01')
-print(validUTF8([235, 140, 4]))  # True (represents a valid character: '日')
-print(validUTF8([197, 130, 100]))  # False (invalid UTF-8 sequence)
-print(validUTF8([235, 140]))  # False (incomplete UTF-8 sequence)
